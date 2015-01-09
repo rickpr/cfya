@@ -2,8 +2,10 @@
 
 one:
   name: MyString
-  attendance: 1
+  category: 1
+  gender: MyString
 
 two:
   name: MyString
-  attendance: 1
+  category: 1
+  gender: MyString

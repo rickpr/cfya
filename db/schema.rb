@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150109073938) do
+ActiveRecord::Schema.define(version: 20150109080645) do
 
   create_table "events", force: :cascade do |t|
     t.date     "day"
@@ -23,16 +23,12 @@ ActiveRecord::Schema.define(version: 20150109073938) do
     t.integer  "unknown"
   end
 
-  create_table "lols", force: :cascade do |t|
-    t.boolean  "name"
-    t.boolean  "thething"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "member_events", force: :cascade do |t|
     t.integer  "member_id"
     t.integer  "event_id"
+    t.boolean  "dinner"
+    t.boolean  "lesson"
+    t.boolean  "activity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,10 +38,10 @@ ActiveRecord::Schema.define(version: 20150109073938) do
 
   create_table "members", force: :cascade do |t|
     t.string   "name"
-    t.integer  "attendance"
+    t.integer  "category"
+    t.string   "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "category"
   end
 
 end

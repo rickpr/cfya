@@ -11,6 +11,18 @@
     </div>
   <% end %>
     <%= f.text_field :name %>
+    <%= f.check_box :category, label: 'Adult (non-YSA)?' %>
+    <%= f.radio_button :gender, 'Male', label: 'Male' %>
+    <%= f.radio_button :gender, 'Female', label: 'Female' %>
+    <%= label :attendance, :dinner do %>
+      <%= check_box :attendance, :dinner %> Dinner
+    <% end %>
+    <%= label :attendance, :lesson do %>
+      <%= check_box :attendance, :lesson %> Lesson
+    <% end %>
+    <%= label :attendance, :activity do %>
+      <%= check_box :attendance, :activity %> Activity
+    <% end %>
     <%= f.primary "Sign in" %>
 <% end %>
 <script type="text/javascript">

@@ -1,4 +1,9 @@
-<% unless @member.errors.any? || @growl_only %>
+<% unless @member.errors.any? || @you_were_here %>
+  <% unless @growl_only %>
+    var new_member = $("<%= escape_javascript(render @member) %>").hide();
+    $('#members').append(new_member);
+    $('#member_<%= @member.id %>').fadeIn('slow');
+  <% end %>
   $.growl.notice({ message: "Welcome to CFYA!"});
 <% else %>
   <% @member.errors.full_messages.each do |message| %>

@@ -25,22 +25,23 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
-    @member = Member.new(member_params)
-
+    @member = Member.new member_params
     if Member.find_by_name @member.name
       @member = Member.find_by_name @member.name
+    puts "********"
+    puts attendance_params.merge({member_id: @member.id, event_id: Event.find_by_day(Time.zone.today).id}) 
+    puts "********"
+
       if @member.updated_at.today?
         @you_were_here = true
       else
-        Member.increment_counter :attendance, @member
-        MemberEvent.create member_id: @member.id, event_id: Event.find_by_day(Time.zone.today).id
+        MemberEvent.create attendance_params.merge({member_id: @member.id, event_id: Event.find_by_day(Time.zone.today).id})
       end
       @growl_only = true
     else
       respond_to do |format|
         if @member.save
-          Member.increment_counter :attendance, @member
-          MemberEvent.create member_id: @member.id, event_id: Event.find_by_day(Time.zone.today).id
+          MemberEvent.create attendance_params.merge({member_id: @member.id, event_id: Event.find_by_day(Time.zone.today).id})
           format.html { redirect_to @member, notice: 'Member was successfully created.' }
           format.json { render :show, status: :created, location: @member }
           format.js
@@ -58,7 +59,6 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(member_params)
-        Member.increment_counter :attendance, @member
         format.html { redirect_to @member, notice: 'Member was successfully updated.' }
         format.json { render :show, status: :ok, location: @member }
         format.js
@@ -88,6 +88,10 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name)
+      params.require(:member).permit :name, :category, :gender
+    end
+
+    def attendance_params
+      params.require(:attendance).permit :dinner, :lesson, :activity
     end
 end
