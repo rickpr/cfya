@@ -1,0 +1,12 @@
+<% unless @member.errors.any? || @growl_only %>
+  $.growl.notice({ message: "Welcome to CFYA!"});
+<% else %>
+  <% @member.errors.full_messages.each do |message| %>
+    $.growl.error({ message: "<%= message %>" });
+  <% end %>
+<% end %>
+<% if @you_were_here %>
+  $.growl.error({ message: "You already checked in today."});
+<% end %>
+$('#new_member')[0].reset();
+

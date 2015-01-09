@@ -1,0 +1,18 @@
+<h1>Attendance Statistics</h1>
+
+Member Listing
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Attendance</th>
+    </tr>
+  </thead>
+
+  <tbody id="members">
+    <% @members.each do |member| %>
+      <%= render 'member', member: member %>
+    <% end %>
+  </tbody>
+</table>
+

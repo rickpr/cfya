@@ -1,0 +1,12 @@
+<% unless @member.errors.any? %>
+  var new_member = $("<%= j render @member %>").hide();
+  $('#members').append(new_member);
+  $('#member_<%= @member.id %>').fadeIn('slow');
+  $.growl.notice({ message: "Welcome to CFYA!"});
+<% else %>
+  <% @member.errors.full_messages.each do |message| %>
+    $.growl.error({ message: "<%= message %>" });
+  <% end %>
+<% end %>
+$('#new_member')[0].reset();
+
