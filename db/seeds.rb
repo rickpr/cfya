@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+for day in (0..365).step 7
+  Event.create day: Date.parse("Thu, 08 Jan 2015") + day
+end

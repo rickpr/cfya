@@ -13,3 +13,6 @@
     <%= f.text_field :name %>
     <%= f.primary "Sign in" %>
 <% end %>
+<script type="text/javascript">
+  $('#member_name').typeahead({ source: <%= @members.map(&:name).to_s.html_safe %> });
+</script>

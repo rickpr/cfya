@@ -11,13 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150109010437) do
+ActiveRecord::Schema.define(version: 20150109073938) do
+
+  create_table "events", force: :cascade do |t|
+    t.date     "day"
+    t.string   "dinner"
+    t.string   "lesson"
+    t.string   "activity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "unknown"
+  end
+
+  create_table "lols", force: :cascade do |t|
+    t.boolean  "name"
+    t.boolean  "thething"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "member_events", force: :cascade do |t|
+    t.integer  "member_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "member_events", ["event_id"], name: "index_member_events_on_event_id"
+  add_index "member_events", ["member_id"], name: "index_member_events_on_member_id"
 
   create_table "members", force: :cascade do |t|
     t.string   "name"
     t.integer  "attendance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "category"
   end
 
 end

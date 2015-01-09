@@ -33,12 +33,14 @@ class MembersController < ApplicationController
         @you_were_here = true
       else
         Member.increment_counter :attendance, @member
+        MemberEvent.create member_id: @member.id, event_id: Event.find_by_day(Time.zone.today).id
       end
       @growl_only = true
     else
       respond_to do |format|
         if @member.save
           Member.increment_counter :attendance, @member
+          MemberEvent.create member_id: @member.id, event_id: Event.find_by_day(Time.zone.today).id
           format.html { redirect_to @member, notice: 'Member was successfully created.' }
           format.json { render :show, status: :created, location: @member }
           format.js
